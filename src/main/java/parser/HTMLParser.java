@@ -17,9 +17,10 @@ public class HTMLParser {
   private HashMap<String, String> commands;
   private final String source;
 
-  public HTMLParser() {
+  public HTMLParser() throws IOException {
     commands = new HashMap<String, String>();
     source = "http://man.he.net";
+    loadCommands();
   }
 
   /**
@@ -28,7 +29,7 @@ public class HTMLParser {
    *
    * @throws IOException
    */
-  public void loadCommands() throws IOException {
+  private void loadCommands() throws IOException {
     Document doc = Jsoup.connect("http://man.he.net/man1").get();
     Elements links = doc.select("a[href]");
 
